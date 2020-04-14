@@ -1,7 +1,7 @@
 Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 --------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2019.2.1 (lin64) Build 2729669 Thu Dec  5 04:48:12 MST 2019
-| Date         : Sun Mar 29 13:16:50 2020
+| Date         : Mon Mar 30 20:54:19 2020
 | Host         : sander-i7-desktop running 64-bit Ubuntu 18.04.4 LTS
 | Command      : report_clock_utilization -file fig5_62_clock_utilization_routed.rpt
 | Design       : fig5_62
