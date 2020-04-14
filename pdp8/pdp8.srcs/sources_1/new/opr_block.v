@@ -28,7 +28,7 @@ module cpu(
     input en_load_opr1,
     output [0:11] ac_out,
     output l_out,
-    output do_skip
+    output do_skip_next
     );
 
 reg [0:11] ac_reg = 0;
@@ -67,6 +67,10 @@ opr_group_1_d opr_impl_1_d(
 
 assign ac_out = ac_reg;
 assign l_out = l_reg;
+
+`include "do_skip.vh"
+
+assign do_skip_next = do_skip(l_reg, ac_reg, i_reg);
 
 always @ (posedge clock)
 begin

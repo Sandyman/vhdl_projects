@@ -32,7 +32,7 @@ module opr_group_2_tb;
 
     localparam period = 20;
 
-`include "do_skip.vh"
+    `include "do_skip.vh"
 
     assign skip_flag = do_skip(l_reg, ac_reg, i_reg);
 
