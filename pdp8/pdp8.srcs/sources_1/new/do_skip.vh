@@ -20,20 +20,17 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module opr_group_2(
-    input l_reg,
-    input [0:11] ac_reg,
-    input [0:11] i_reg,
-    output do_skip
-    );
+function do_skip;
 
-assign ac_eqz = ~|ac_reg;
+input l_reg;
+input [0:11] ac_reg;
+input [0:11] i_reg;
 
-assign ac_neg = i_reg[5] && ac_reg[0];
-assign ac_clr = i_reg[6] && ac_eqz;
-assign l_set = i_reg[7] && l_reg;
+begin
+                       // SPA, SNA, SZL (AND group)
+    do_skip = i_reg[8] ? ~(i_reg[5] && ac_reg[0]) && ~(i_reg[6] && ~|ac_reg) && ~(i_reg[7] && l_reg)
+                       // SMA, SZA, SNL (OR group)
+                       :   i_reg[5] && ac_reg[0]  ||   i_reg[6] && ~|ac_reg  ||   i_reg[7] && l_reg;
+end
 
-assign do_skip = i_reg[8] ? ~ac_neg && ~ac_clr && ~l_set  // SPA, SNA, SZL
-                          :  ac_neg ||  ac_clr ||  l_set; // SMA, SZA, SNL
-
-endmodule
+endfunction

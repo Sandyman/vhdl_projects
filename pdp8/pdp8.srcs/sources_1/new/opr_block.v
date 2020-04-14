@@ -20,14 +20,19 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 module cpu(
-    input [0:11] ac_reg,
-    input l_reg,
+//    input [0:11] ac_reg,
+//    input l_reg,
     input [0:11] i_reg,
     input clock,
+    input reset,
+    input en_load_opr1,
     output [0:11] ac_out,
     output l_out,
     output do_skip
     );
+
+reg [0:11] ac_reg = 0;
+reg l_reg = 0;
 
 wire [0:11] ac1, ac2, ac3, ac4;
 wire l1, l2, l3, l4;
@@ -60,13 +65,13 @@ opr_group_1_d opr_impl_1_d(
     .ac_out(ac4), 
     .l_out(l4));
 
-opr_group_2 opr_impl_2(
-    .l_reg(l_reg), 
-    .ac_reg(ac_reg), 
-    .i_reg(i_reg), 
-    .do_skip(do_skip));
+assign ac_out = ac_reg;
+assign l_out = l_reg;
 
-assign ac_out = ac4;
-assign l_out = l4;
+always @ (posedge clock)
+begin
+    if (reset) ac_reg <= 0;
+    else if (en_load_opr1) ac_reg <= ac4;
+end
 
 endmodule
