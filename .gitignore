@@ -9,6 +9,7 @@
 
 # Do NOT ignore source files, including block diagrams and EDIF files
 !*.vhd
+!*.vh
 !*.v
 !*.bd
 !*.edif
