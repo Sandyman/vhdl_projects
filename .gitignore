@@ -3,8 +3,9 @@
 
 # Exclude all!
 *
-~*/
-~.gitignore
+
+!*/
+!.gitignore
 
 # Do NOT ignore source files, including block diagrams and EDIF files
 !*.vhd
@@ -18,12 +19,12 @@
 # Constraint files
 !*.xdc
 
-# TCL files
-!*.tcl
-
+# C files
 !*.c
 !*.h
 !*.elf
 !*.bmm
 !*.xmp
-*.html
+
+*/*.runs
+*/*.sim
