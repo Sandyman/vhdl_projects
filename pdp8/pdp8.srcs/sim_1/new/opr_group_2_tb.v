@@ -139,6 +139,8 @@ begin
     i_reg = 12'b11110xxx1000;
     simulate(6, 8'b00010001);
 
+    // There are no more states to test, as SPA and
+    // SNA can't both be false simultaneously!
 end
 
 endmodule
