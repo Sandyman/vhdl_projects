@@ -315,6 +315,8 @@ module traffic_light_controller(
 
 wire clock;
 
+wire xing_red;
+wire xing_green;
 wire xing_set;
 wire xing_flash_expired;
 wire xing_grace_expired;
@@ -325,15 +327,30 @@ wire btn;
 wire done;
 wire go;
 
+wire road_red;
+wire road_yellow;
 wire road_set;
 wire road_grace_expired;
 wire road_green_expired;
 wire road_yellow_expired;
 
+wire [7:0] pwm_reg;
+
+assign led0_r = (pwm_reg >= 220) && road_red;
+assign led0_g = (pwm_reg >= 220) && road_green;
+
+assign led1_r = (pwm_reg >= 220) && xing_red;
+assign led1_g = (pwm_reg >= 220) && xing_green;
+
 clock_divider clock_div(
     .reset(reset),
     .clk(clk),
     .clock(clock));
+
+pwm pwm(
+    .reset(reset),
+    .clock(clk),
+    .pwm(pwm_reg));
 
 road_timer road_tim(
     .reset(reset),
@@ -353,8 +370,8 @@ road_fsm road_state_machine(
     .yellow_expired(road_yellow_expired),
     .set(road_set),
     .go(go),
-    .red(led0_r),
-    .green(led0_g));
+    .red(road_red),
+    .green(road_green));
 
 xing_timer xing_tim(
     .reset(reset),
@@ -377,7 +394,7 @@ xing_fsm xing_state_machine(
     .set(xing_set),
     .btn(btn),
     .done(done),
-    .red(led1_r),
-    .green(led1_g));
+    .red(xing_red),
+    .green(xing_green));
 
 endmodule
