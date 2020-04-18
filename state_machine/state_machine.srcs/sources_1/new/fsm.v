@@ -336,11 +336,13 @@ wire road_yellow_expired;
 
 wire [7:0] pwm_reg;
 
-assign led0_r = (pwm_reg >= 220) && road_red;
-assign led0_g = (pwm_reg >= 220) && road_green;
+localparam brightness = 240; // 0 (lightest) .. 249 (darkest, off even?)
 
-assign led1_r = (pwm_reg >= 220) && xing_red;
-assign led1_g = (pwm_reg >= 220) && xing_green;
+assign led0_r = (pwm_reg >= brightness) && road_red;
+assign led0_g = (pwm_reg >= brightness) && road_green;
+
+assign led1_r = (pwm_reg >= brightness) && xing_red;
+assign led1_g = (pwm_reg >= brightness) && xing_green;
 
 clock_divider clock_div(
     .reset(reset),
