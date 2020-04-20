@@ -33,8 +33,8 @@ module road_timer(
 reg [7:0] counter = 0;
 
 assign grace_expired = (counter >= 2 * `TICKS_PER_SECOND);
-assign green_expired = (counter >= 20 * `TICKS_PER_SECOND);
 assign yellow_expired = (counter >= 5 * `TICKS_PER_SECOND);
+assign green_expired = (counter >= 20 * `TICKS_PER_SECOND);
 
 always @ (posedge clock)
 begin
@@ -43,4 +43,5 @@ begin
     else if (~ (grace_expired && green_expired && yellow_expired))
         counter <= counter + 1;
 end
+
 endmodule

@@ -34,8 +34,8 @@ module xing_timer(
 reg [7:0] counter = 0;
 
 assign grace_expired = (counter >= 2 * `TICKS_PER_SECOND);
-assign green_expired = (counter >= 12 * `TICKS_PER_SECOND);
-assign flash_expired = (counter >= 8 * `TICKS_PER_SECOND);
+assign green_expired = (counter >= 15 * `TICKS_PER_SECOND);
+assign flash_expired = (counter >= 10 * `TICKS_PER_SECOND);
 
 always @ (posedge clock)
 begin
