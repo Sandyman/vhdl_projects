@@ -46,24 +46,21 @@ begin
 end
 
 //
-// The next part creates a 1Hz "flash" clock
+// The next part creates a 1Hz "flash" clock. We force the
+// flash output to go HIGH when SET is set.
 //
-reg [2:0] flash_clk = 2'd0;
-reg flash_out;
+reg [2:0] flash_clk = 3'd0;
 
 always @ (posedge clock)
 begin
-    if (reset) begin
-        flash_clk <= 2'd0;
-    end
-    else if (flash_clk >= (`TICKS_PER_SECOND / 2)) begin
-        flash_clk <= 2'd0;
-        flash_out <= ~ flash_out;
-    end
+    if (reset)
+        flash_clk <= 3'd0;
+    else if (set)
+        flash_clk = 3'd4;
     else
         flash_clk <= flash_clk + 1;
 end
 
-assign flash = flash_out;
+assign flash = flash_clk[2];
 
 endmodule
