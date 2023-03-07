@@ -58,39 +58,39 @@ begin
     set = 1'b0;
     go = 1'b0;
     case (1'b1)
-        current[GN]: begin
-            if (green_expired && btn) begin
-                next[YL] = 1'b1;
-                set = 1;
-            end
-            else
-                next[GN] = 1'b1;
+    current[GN]: begin
+        if (green_expired && btn) begin
+            next[YL] = 1'b1;
+            set = 1;
         end
-        current[YL]: begin
-            if (yellow_expired) begin
-                next[RD] = 1'b1;
-                set = 1;
-                go = 1;
-            end
-            else
-                next[YL] = 1'b1;
+        else
+            next[GN] = 1'b1;
+    end
+    current[YL]: begin
+        if (yellow_expired) begin
+            next[RD] = 1'b1;
+            set = 1;
+            go = 1;
         end
-        current[RD]: begin
-            if (done) begin
-                set = 1;
-                next[GC] = 1'b1;
-            end
-            else
-                next[RD] = 1'b1;
+        else
+            next[YL] = 1'b1;
+    end
+    current[RD]: begin
+        if (done) begin
+            set = 1;
+            next[GC] = 1'b1;
         end
-        current [GC]: begin
-            if (grace_expired) begin
-                set = 1;
-                next[GN] = 1'b1;
-            end
-            else
-                next[GC] = 1'b1;
+        else
+            next[RD] = 1'b1;
+    end
+    current [GC]: begin
+        if (grace_expired) begin
+            set = 1;
+            next[GN] = 1'b1;
         end
+        else
+            next[GC] = 1'b1;
+    end
     endcase
 end
 

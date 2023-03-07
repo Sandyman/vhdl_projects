@@ -33,7 +33,7 @@ always @ (posedge clock)
 begin
     if (reset)
         counter <= 10'd0;
-    else if (counter >= 10'd1000) begin
+    else if (counter > 10'd999) begin
         counter <= 10'd0;
         clock_50khz <= ~ clock_50khz;
     end
